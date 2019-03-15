@@ -6,6 +6,7 @@ http://localhost/garage_sale/index.php?type=insert&username=asdfaasadasdssffss&p
 kalo ngga pake api ku ngga apa apa
 
 user level
+
 0 = user
 1 = penjual
 2 = admin
