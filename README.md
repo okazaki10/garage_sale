@@ -15,3 +15,4 @@ pembayaran status
 0 = belum transfer
 1 = sudah transfer tapi penjual belum konfirm dengan bukti foto
 2 = penjual sudah konfirm dengan nomor resi
+
