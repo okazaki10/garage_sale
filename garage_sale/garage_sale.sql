@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2019 at 02:15 PM
+-- Generation Time: Mar 19, 2019 at 02:46 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.5.33
 
@@ -34,9 +34,17 @@ CREATE TABLE `barang` (
   `stok` int(255) NOT NULL,
   `harga` int(255) NOT NULL,
   `rating_total` int(255) NOT NULL,
-  `id_ulasan` int(255) NOT NULL,
+  `tanggal_masuk` date NOT NULL,
   `gambar_preview` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barang`
+--
+
+INSERT INTO `barang` (`id_barang`, `id_penjual`, `nama_barang`, `deskripsi`, `stok`, `harga`, `rating_total`, `tanggal_masuk`, `gambar_preview`) VALUES
+(123, 6, '123123', '123', 123, 123, 12, '0000-00-00', '12312'),
+(321412, 8, '213', '123', 123, 123, 1231212, '0000-00-00', '1231');
 
 -- --------------------------------------------------------
 
@@ -91,6 +99,8 @@ CREATE TABLE `pembayaran` (
   `harga_total` int(255) NOT NULL,
   `bukti_foto` varchar(255) NOT NULL,
   `no_resi` varchar(255) NOT NULL,
+  `tanggal_mulai` date NOT NULL,
+  `tanggal_selesai` date NOT NULL,
   `status` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -102,10 +112,11 @@ CREATE TABLE `pembayaran` (
 
 CREATE TABLE `ulasan` (
   `id_ulasannya` int(255) NOT NULL,
-  `id_ulasan` int(255) NOT NULL,
+  `id_barang` int(255) NOT NULL,
   `id_user` int(255) NOT NULL,
   `rating` int(255) NOT NULL,
-  `komentar` varchar(255) NOT NULL
+  `komentar` varchar(255) NOT NULL,
+  `tanggal_mulai` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -124,9 +135,20 @@ CREATE TABLE `user` (
   `provinsi` varchar(255) NOT NULL,
   `kota` varchar(255) NOT NULL,
   `kode_pos` int(255) NOT NULL,
+  `nomor_rekening` varchar(255) NOT NULL,
   `foto_profil` varchar(255) NOT NULL,
   `level` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id_user`, `username`, `password`, `nama_lengkap`, `alamat`, `nomor_telpon`, `provinsi`, `kota`, `kode_pos`, `nomor_rekening`, `foto_profil`, `level`) VALUES
+(6, '231', '1', '23', '123123', 1213, '21', '12', 31, '2', '123', 123),
+(7, 'f', 'c', 'sf', '', 0, '', '', 0, '', '2019-03-18 06-41-07.961854IMG_20190222_192934_697.jpg', 0),
+(8, '213', '2313', '123', '123', 1231, '23', '123', 1212, '31', '212', 413),
+(9, 'raka', 'coeg', 'xcvvv', 'z', 8, 'c', 'c', 8, '8', '2019-03-18 06-42-58.45237020190318_124250.jpg', 0);
 
 --
 -- Indexes for dumped tables
@@ -137,8 +159,7 @@ CREATE TABLE `user` (
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`),
-  ADD KEY `id_penjual` (`id_penjual`),
-  ADD KEY `id_ulasan` (`id_ulasan`);
+  ADD KEY `id_penjual` (`id_penjual`);
 
 --
 -- Indexes for table `gambar_barang`
@@ -175,7 +196,7 @@ ALTER TABLE `pembayaran`
 --
 ALTER TABLE `ulasan`
   ADD PRIMARY KEY (`id_ulasannya`),
-  ADD KEY `id_ulasan` (`id_ulasan`),
+  ADD KEY `id_ulasan` (`id_barang`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -192,7 +213,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_barang` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=321413;
 --
 -- AUTO_INCREMENT for table `gambar_barang`
 --
@@ -222,7 +243,7 @@ ALTER TABLE `ulasan`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --
@@ -263,7 +284,8 @@ ALTER TABLE `pembayaran`
 -- Constraints for table `ulasan`
 --
 ALTER TABLE `ulasan`
-  ADD CONSTRAINT `ulasan_ibfk_1` FOREIGN KEY (`id_ulasan`) REFERENCES `barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ulasan_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ulasan_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

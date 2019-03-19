@@ -68,7 +68,7 @@ class Model extends Config
 		$query = "update $table set $field where $value";
 		$hasil = mysqli_query($db,$query);
 	}
-	function generateRandomString($length = 10) {
+	public static function generateRandomString($length = 10) {
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$charactersLength = strlen($characters);
 		$randomString = '';
@@ -76,6 +76,9 @@ class Model extends Config
 			$randomString .= $characters[rand(0, $charactersLength - 1)];
 		}
 		return $randomString;
+	}
+	public static function gettimeimage(){
+		return date('Y-m-d H-i-s.') . gettimeofday()['usec'];
 	}
 }
 ?>
