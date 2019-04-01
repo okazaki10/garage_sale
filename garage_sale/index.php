@@ -4,7 +4,7 @@ if(isset($_GET['type'])){
 	if($_GET['type'] == "insert"){
 		$username = $_GET['username'];
 		$password = $_GET['password'];	
-		Model::insert("user","'','$username','$password','','','','','','','',''");
+		Model::insert("user","'','$username','$password','','','','','','','','',''");
 	}else if($_GET['type'] == "edit"){
 		$id = $_GET['id'];
 		$username = $_GET['username'];

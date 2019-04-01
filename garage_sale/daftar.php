@@ -14,23 +14,27 @@ if(isset($_POST['type'])){
 		$kode_pos = $_POST['kode_pos'];	
 		$level = $_POST['level'];
 		$nomor_rekening = $_POST['nomor_rekening'];
-		$attachment = $_FILES['gambar']['name'];
-		$attach_tmp = $_FILES['gambar']['tmp_name'];
 		$dataselect = Model::select("user","username = '$username'");
 		if ($dataselect){
 			$response->success = 0;
 			echo json_encode($response);
 		}else{
-			$time = Model::gettimeimage();
-			$namagambar = $time.$attachment;
+			if(isset($_FILES['gambar']['name'])){
+				$attachment = $_FILES['gambar']['name'];
+				$attach_tmp = $_FILES['gambar']['tmp_name'];
+				$namagambar = Model::uploadimage($attachment,$attach_tmp,"foto_profil/");
+			}else{
+				$namagambar = "none.jpg";
+			}
 			Model::insert("user","'','$username','$password','$nama_lengkap','$alamat','$nomor_telpon','$provinsi','$kota','$kode_pos','$nomor_rekening','$namagambar','$level'");
-			move_uploaded_file($attach_tmp, "foto_profil/".$namagambar);
+			
 			$data = Model::select("user","username = '$username' and password = '$password'");	
 			$response->success = 1;
 			$response->id_user = $data['id_user'];
 			$response->username = $data['username'];
 			$response->password = $data['password'];
 			$response->level = $data['level'];
+			$response->foto_profil = $data['foto_profil'];
 			echo json_encode($response);			
 		}
 	}

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2019 at 02:46 AM
+-- Generation Time: Apr 01, 2019 at 06:00 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.5.33
 
@@ -33,18 +33,10 @@ CREATE TABLE `barang` (
   `deskripsi` varchar(255) NOT NULL,
   `stok` int(255) NOT NULL,
   `harga` int(255) NOT NULL,
-  `rating_total` int(255) NOT NULL,
+  `rating_total` float NOT NULL,
   `tanggal_masuk` date NOT NULL,
   `gambar_preview` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `barang`
---
-
-INSERT INTO `barang` (`id_barang`, `id_penjual`, `nama_barang`, `deskripsi`, `stok`, `harga`, `rating_total`, `tanggal_masuk`, `gambar_preview`) VALUES
-(123, 6, '123123', '123', 123, 123, 12, '0000-00-00', '12312'),
-(321412, 8, '213', '123', 123, 123, 1231212, '0000-00-00', '1231');
 
 -- --------------------------------------------------------
 
@@ -95,7 +87,10 @@ CREATE TABLE `laporan` (
 CREATE TABLE `pembayaran` (
   `id_pembayaran` int(255) NOT NULL,
   `id_penjual` int(255) NOT NULL,
-  `id_keranjang` int(255) NOT NULL,
+  `id_user` int(255) NOT NULL,
+  `id_barang` int(255) NOT NULL,
+  `kurir` varchar(255) NOT NULL,
+  `jumlah_barang` int(255) NOT NULL,
   `harga_total` int(255) NOT NULL,
   `bukti_foto` varchar(255) NOT NULL,
   `no_resi` varchar(255) NOT NULL,
@@ -141,16 +136,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id_user`, `username`, `password`, `nama_lengkap`, `alamat`, `nomor_telpon`, `provinsi`, `kota`, `kode_pos`, `nomor_rekening`, `foto_profil`, `level`) VALUES
-(6, '231', '1', '23', '123123', 1213, '21', '12', 31, '2', '123', 123),
-(7, 'f', 'c', 'sf', '', 0, '', '', 0, '', '2019-03-18 06-41-07.961854IMG_20190222_192934_697.jpg', 0),
-(8, '213', '2313', '123', '123', 1231, '23', '123', 1212, '31', '212', 413),
-(9, 'raka', 'coeg', 'xcvvv', 'z', 8, 'c', 'c', 8, '8', '2019-03-18 06-42-58.45237020190318_124250.jpg', 0);
-
---
 -- Indexes for dumped tables
 --
 
@@ -189,7 +174,8 @@ ALTER TABLE `laporan`
 ALTER TABLE `pembayaran`
   ADD PRIMARY KEY (`id_pembayaran`),
   ADD KEY `id_penjual` (`id_penjual`),
-  ADD KEY `id_list_pembelian` (`id_keranjang`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_barang` (`id_barang`);
 
 --
 -- Indexes for table `ulasan`
@@ -213,17 +199,17 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=321413;
+  MODIFY `id_barang` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=321537;
 --
 -- AUTO_INCREMENT for table `gambar_barang`
 --
 ALTER TABLE `gambar_barang`
-  MODIFY `id_gambarnya_barang` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_gambarnya_barang` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 --
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_keranjang` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `laporan`
 --
@@ -233,17 +219,17 @@ ALTER TABLE `laporan`
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `ulasan`
 --
 ALTER TABLE `ulasan`
-  MODIFY `id_ulasannya` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ulasannya` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 --
 -- Constraints for dumped tables
 --
@@ -277,8 +263,9 @@ ALTER TABLE `laporan`
 -- Constraints for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_keranjang`) REFERENCES `keranjang` (`id_keranjang`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pembayaran_ibfk_2` FOREIGN KEY (`id_penjual`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pembayaran_ibfk_2` FOREIGN KEY (`id_penjual`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pembayaran_ibfk_4` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pembayaran_ibfk_5` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ulasan`
