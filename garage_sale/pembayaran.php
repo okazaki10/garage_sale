@@ -21,7 +21,7 @@ if(isset($_POST['type'])){
 		$tanggal_mulai = date('Y-m-d');
 		$tanggal_selesai = "";
 		$status = 0;
-		$data = Model::insertselect("pembayaran","'','$id_penjual','$id_user','$id_barang','$kurir','$jumlah_barang','$harga_total','$bukti_foto','$no_resi','$tanggal_mulai','$tanggal_selesai','$status'");
+		$data = Model::insertselect("pembayaran","'0','$id_penjual','$id_user','$id_barang','$kurir','$jumlah_barang','$harga_total','$bukti_foto','$no_resi','$tanggal_mulai','$tanggal_selesai','$status'");
 		$response->success = 2;
 		$response->id_pembayaran = $data;
 		echo json_encode($response);

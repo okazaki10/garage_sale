@@ -27,7 +27,7 @@ if(isset($_POST['type'])){
 		$barang = Model::select("barang","id_barang = '$id_barang'");
 		$stok = $barang['stok'];
 		if ($jumlah_barang <= $stok){
-		$data = Model::insert("keranjang","'','$id_user','$id_barang','$jumlah_barang','$harga_total'");
+		$data = Model::insert("keranjang","'0','$id_user','$id_barang','$jumlah_barang','$harga_total'");
 		$total = $stok - $jumlah_barang;
 		Model::update("barang","stok = '$total'","id_barang = '$id_barang'");
 		$response->success = 2;

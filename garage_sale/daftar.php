@@ -26,7 +26,7 @@ if(isset($_POST['type'])){
 			}else{
 				$namagambar = "none.jpg";
 			}
-			Model::insert("user","'','$username','$password','$nama_lengkap','$alamat','$nomor_telpon','$provinsi','$kota','$kode_pos','$nomor_rekening','$namagambar','$level'");
+			Model::insert("user","'0','$username','$password','$nama_lengkap','$alamat','$nomor_telpon','$provinsi','$kota','$kode_pos','$nomor_rekening','$namagambar','$level'");
 			
 			$data = Model::select("user","username = '$username' and password = '$password'");	
 			$response->success = 1;

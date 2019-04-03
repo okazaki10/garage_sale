@@ -15,7 +15,7 @@ if(isset($_POST['type'])){
 		$rating = $_POST['rating'];
 		$komentar = $_POST['komentar'];
 		$tanggal_mulai = date('Y-m-d');
-		Model::insert("ulasan","'','$id_barang','$id_user','$rating','$komentar','$tanggal_mulai'");
+		Model::insert("ulasan","'0','$id_barang','$id_user','$rating','$komentar','$tanggal_mulai'");
 		$data = Model::selectbanyak("ulasan","id_barang = '$id_barang'");
 		$ulasan_count = count($data);
 		$total = 0;
