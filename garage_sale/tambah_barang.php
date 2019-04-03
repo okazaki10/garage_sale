@@ -22,11 +22,11 @@ if(isset($_POST['type'])){
 		}else{
 			$namagambar = "none.jpg";
 		}
-		$id_barang = Model::insertselect("barang","'0','$id_penjual','$nama_barang','$deskripsi','$stok','$harga','0000-00-00','$tanggal_masuk','$namagambar'");
+		$id_barang = Model::insertselect("barang","'0','$id_penjual','$nama_barang','$deskripsi','$stok','$harga','0','$tanggal_masuk','$namagambar'");
 		for($i = 0;$i<$total_gambar;$i++){
 		
 			$namagambar2 = Model::uploadimage($_FILES['list_gambar'.$i]['name'],$_FILES['list_gambar'.$i]['tmp_name'],"gambar_barang/");
-			Model::insert("gambar_barang","'','$id_barang','$namagambar2'");
+			Model::insert("gambar_barang","'0','$id_barang','$namagambar2'");
 		}
 		$response->success = 1;
 		$response->id_barang = $id_barang;

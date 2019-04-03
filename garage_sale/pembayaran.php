@@ -19,7 +19,7 @@ if(isset($_POST['type'])){
 		$bukti_foto = "";
 		$no_resi = "";
 		$tanggal_mulai = date('Y-m-d');
-		$tanggal_selesai = "";
+		$tanggal_selesai = "0000-00-00";
 		$status = 0;
 		$data = Model::insertselect("pembayaran","'0','$id_penjual','$id_user','$id_barang','$kurir','$jumlah_barang','$harga_total','$bukti_foto','$no_resi','$tanggal_mulai','$tanggal_selesai','$status'");
 		$response->success = 2;
