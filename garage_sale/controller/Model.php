@@ -127,7 +127,7 @@ class Model extends Config
 		return $namagambar;
 	}
 	public static function gettimeimage(){
-		return date('Y-m-d H-i-s.') . gettimeofday()['usec'];
+		return date('Y-m-d H-i-s.') . gettimeofday(true);
 	}
 }
 ?>
