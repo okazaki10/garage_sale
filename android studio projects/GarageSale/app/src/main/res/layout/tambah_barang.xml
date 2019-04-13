@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="245dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="nama barang" />
+
+        <EditText
+            android:id="@+id/nama_barang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="30dp" />
+
+        <TextView
+            android:id="@+id/textView22312"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="deskripsi" />
+        <EditText
+            android:id="@+id/deskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="30dp" />
+
+        <TextView
+            android:id="@+id/textView22132"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="stok" />
+
+        <EditText
+            android:id="@+id/stok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="76dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="harga" />
+
+        <EditText
+            android:id="@+id/harga_barang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="122dp" />
+<!--
+        <TextView
+            android:id="@+id/textView433"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="rating" />
+
+        <Spinner
+            android:id="@+id/rating"
+            android:layout_width="match_parent"
+            android:layout_height="82dp" />
+-->
+
+        <TextView
+            android:id="@+id/textView54323"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="gambar yang akan di tampilkan di list barang" />
+
+        <RelativeLayout
+            android:layout_width="106dp"
+            android:layout_height="117dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/gallery" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView54323312412131"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="gambar yang akan di tampilkan di halaman barang" />
+        <LinearLayout
+            android:id="@+id/imageviewlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        </LinearLayout>
+        <Button
+            android:id="@+id/add_barang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tambah barang" />
+
+
+    </LinearLayout>
+
+</ScrollView>
